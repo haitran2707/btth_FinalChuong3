@@ -1,63 +1,324 @@
-<<<<<<< HEAD
-# bt_Final_Chuong3
-=======
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 COURSE MANAGEMENT SYSTEM (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 Giới thiệu
 
-## About Laravel
+Hệ thống **Quản lý khóa học trực tuyến (Course Management System)** được xây dựng bằng Laravel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Ứng dụng cho phép:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Quản lý khóa học
+* Quản lý bài học trong khóa học
+* Quản lý học viên đăng ký
+* Dashboard thống kê
+* Tìm kiếm, lọc & sắp xếp nâng cao
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚙️ Yêu cầu hệ thống
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+* PHP >= 8.1
+* Composer
+* MySQL / MariaDB
+* Node.js (tuỳ chọn)
+* Laravel >= 10
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🚀 Hướng dẫn cài đặt & chạy project
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone project
 
-### Premium Partners
+```bash
+git clone <repo-url>
+cd course-management
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+### 2. Cài đặt thư viện
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Tạo file môi trường
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### 4. Cấu hình database
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
->>>>>>> d32bd5d (first commit)
+Mở file `.env` và chỉnh:
+
+```env
+DB_DATABASE=course_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+### 5. Tạo key ứng dụng
+
+```bash
+php artisan key:generate
+```
+
+---
+
+### 6. Chạy migration
+
+```bash
+php artisan migrate
+```
+
+---
+
+### 7. Tạo storage link (hiển thị ảnh)
+
+```bash
+php artisan storage:link
+```
+
+---
+
+### 8. Chạy server
+
+```bash
+php artisan serve
+```
+
+👉 Truy cập:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 🧱 Cấu trúc project
+
+```
+app/
+ ├── Models/
+ │    ├── Course.php
+ │    ├── Lesson.php
+ │    ├── Student.php
+ │    └── Enrollment.php
+ │
+ ├── Http/
+ │    ├── Controllers/
+ │    │    ├── CourseController.php
+ │    │    ├── LessonController.php
+ │    │    └── EnrollmentController.php
+ │    │
+ │    └── Requests/
+ │         └── CourseRequest.php
+
+resources/views/
+ ├── courses/
+ ├── lessons/
+ ├── enrollments/
+ └── layouts/master.blade.php
+
+database/migrations/
+ ├── create_courses_table.php
+ ├── create_lessons_table.php
+ ├── create_students_table.php
+ └── create_enrollments_table.php
+```
+
+---
+
+## 🔗 Quan hệ dữ liệu
+
+* 1 Course → nhiều Lesson
+* 1 Course → nhiều Enrollment
+* 1 Student → nhiều Enrollment
+* Course ↔ Student (Many-to-Many qua bảng enrollments)
+
+---
+
+## ✨ Chức năng chính
+
+### 📘 Quản lý khóa học
+
+* Thêm / sửa / xóa (Soft Delete)
+* Khôi phục khóa học
+* Upload ảnh
+* Tự sinh slug
+* Hiển thị số bài học & học viên
+
+---
+
+### 🎬 Quản lý bài học
+
+* Thêm bài học theo khóa học
+* Sắp xếp theo `order`
+* Hiển thị theo từng khóa học
+
+---
+
+### 👨‍🎓 Quản lý đăng ký học
+
+* Đăng ký khóa học
+* Không cho trùng học viên trong cùng khóa
+* Hiển thị danh sách học viên
+* Tổng số học viên
+
+---
+
+### 📊 Dashboard
+
+Hiển thị:
+
+* Tổng số khóa học
+* Tổng số học viên
+* Tổng doanh thu
+* Khóa học nhiều học viên nhất
+* 5 khóa học mới nhất
+
+---
+
+## 🔍 Tính năng nâng cao
+
+### 🔎 Tìm kiếm nâng cao
+
+* Theo tên khóa học
+* Theo giá (min → max)
+* Theo trạng thái (draft / published)
+
+---
+
+### 🔃 Lọc & sắp xếp
+
+* Theo giá
+* Theo số học viên
+* Theo ngày tạo
+
+---
+
+### 📈 Thống kê
+
+* Doanh thu theo khóa học
+* Tổng số học viên mỗi khóa
+
+---
+
+## ⚡ Tối ưu hệ thống
+
+### Eloquent Optimization
+
+```php
+Course::with('lessons', 'enrollments')
+```
+
+👉 Tránh lỗi **N+1 Query**
+
+---
+
+### Scope sử dụng
+
+```php
+scopePublished()
+scopePriceBetween()
+```
+
+---
+
+## 🧪 Validation
+
+Sử dụng Form Request:
+
+```
+app/Http/Requests/CourseRequest.php
+```
+
+Bao gồm:
+
+* required
+* numeric
+* image upload
+* validate status
+* validate slug unique
+
+---
+
+## 📌 Lưu ý
+
+* Slug được tự động sinh từ tên khóa học
+* Soft Delete sử dụng:
+
+```php
+withTrashed()
+restore()
+```
+
+* Ảnh lưu tại:
+
+```
+storage/app/public
+```
+
+---
+
+## 🧪 Tài khoản test (nếu có)
+
+Bạn có thể tự thêm dữ liệu qua:
+
+* Trang Courses
+* Trang Lessons
+* Trang Enrollments
+
+---
+
+## 🎯 Demo nhanh
+
+```bash
+php artisan serve
+```
+
+👉 Mở trình duyệt:
+
+```
+http://localhost:8000
+```
+
+---
+
+## ✅ Checklist hoàn thành
+
+✔ CRUD Course
+✔ CRUD Lesson
+✔ Enrollment Management
+✔ Dashboard thống kê
+✔ Search + Filter + Sort
+✔ Soft Delete + Restore
+✔ Quan hệ Eloquent
+✔ Validation (Form Request)
+✔ Scope + Optimization
+
+---
+
+## 👨‍💻 Tác giả
+
+* Sinh viên: Trần Đỗ Minh Hải
+* Môn học: Laravel / Web Development
+
+---
+
+## 🚀 Ghi chú thêm
+
+Bạn có thể nâng cấp thêm:
+
+* Seeder dữ liệu mẫu
+* API REST
+* Phân quyền (Admin/User)
+* Upload video thay vì link
+
+---
